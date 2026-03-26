@@ -4,36 +4,115 @@
 <meta charset="UTF-8">
 <title>Calculadora Binomial Avançada</title>
 <style>
-    body { font-family: Arial; text-align: center; background: #f4f4f4; }
-    input, select, button { padding: 8px; margin: 5px; }
-    .box { margin: 15px; }
+    body {
+        margin: 0;
+        font-family: 'Segoe UI', sans-serif;
+        background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+        color: white;
+        text-align: center;
+    }
+
+    h1 {
+        margin-top: 20px;
+        font-size: 32px;
+    }
+
+    select, input, button {
+        padding: 10px;
+        margin: 8px;
+        border-radius: 8px;
+        border: none;
+        outline: none;
+        font-size: 14px;
+    }
+
+    input, select {
+        background: #1e2a38;
+        color: white;
+        border: 1px solid #00c6ff;
+    }
+
+    button {
+        background: linear-gradient(45deg, #00c6ff, #0072ff);
+        color: white;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    button:hover {
+        transform: scale(1.05);
+        box-shadow: 0 0 10px #00c6ff;
+    }
+
+    .box {
+        margin: 15px;
+    }
+
+    #saida {
+        background: rgba(255,255,255,0.05);
+        padding: 20px;
+        margin: 20px auto;
+        width: 80%;
+        border-radius: 15px;
+        box-shadow: 0 0 20px rgba(0,198,255,0.3);
+        animation: fadeIn 0.5s ease-in-out;
+    }
+
+    /* ✨ ANIMAÇÃO */
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* 🔺 Triângulo mais bonito */
+    span {
+        display:inline-block;
+        width:40px;
+        font-weight:bold;
+        margin:3px;
+        transition:0.2s;
+    }
+
+    span:hover {
+        color:#00c6ff;
+        transform: scale(1.2);
+    }
 </style>
 </head>
 <body>
-    <div style="
+ <div style="
     display:flex;
     justify-content:space-between;
     align-items:center;
-    padding:10px 20px;
-    background:#222;
-    color:white;
+    padding:15px 30px;
+    background:rgba(0,0,0,0.4);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255,255,255,0.1);
 ">
 
     <!-- 👤 Nome -->
     <div style="font-size:18px; font-weight:bold;">
-        Henrique Neves
-        Pablo Eduardo
-        Guilherme Jordão
-        Victor Portela
-        Vitor Soares
-        João Guilherme
-        Lukas Alves
+        Henrique Neves,
+        Pablo Eduardo,
+        Guilherme Jordão,
+        Victor Portela,
+        Vitor Soares,
+        João Guilherme,
+        Lukas Alves,
 
     </div>
 
     <!-- 🖼️ Logo -->
     <div>
-        <img src="logo.png" alt="Logo" style="height:40px;">
+        <img src="logo.png" style="height:40px; transition:0.3s;" 
+         onmouseover="this.style.transform='scale(1.1)'" 
+         onmouseout="this.style.transform='scale(1)'">
     </div>
 
 </div>
