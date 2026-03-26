@@ -397,53 +397,43 @@ Este é o ${k+1}º termo da expansão, onde o expoente de x é ${n-k}.
 
         let prob = combinacao(n,k)*(0.5**n)*100;
 
-       out.innerHTML = `
-    <h3>📊 Probabilidade Binomial</h3>
+        out.innerHTML = `
+    <h3>📊 Resultado</h3>
+    <p style="font-size:18px;">P = ${prob.toFixed(2)}%</p>
 
-    <p>Vamos calcular a chance de ocorrer <b>${k} sucessos</b> em <b>${n} tentativas</b>.</p>
+    <h3>🧠 Probabilidade Binomial – Explicação</h3>
 
-    <h3>📌 Fórmula</h3>
+    <p>
+    A probabilidade binomial é usada quando repetimos um experimento várias vezes,
+    com apenas dois resultados possíveis (como cara ou coroa).
+    </p>
 
     <div style="font-size:20px; text-align:center; margin:10px;">
-    P = C(n,k) · p<sup>k</sup> · (1 − p)<sup>n − k</sup>
+    P = C(n,k) · p<sup>k</sup> · (1 − p)<sup>${n-k}</sup>
     </div>
 
-    <h3>📊 Valores usados</h3>
-
+    <p><b>Valores usados:</b></p>
     <ul>
         <li>n = ${n}</li>
         <li>k = ${k}</li>
         <li>p = ${p}</li>
     </ul>
 
-    <h3>🧠 Interpretação</h3>
-
-    <p>
-    Estamos calculando a probabilidade de obter exatamente ${k} sucessos 
-    em ${n} tentativas, onde cada tentativa tem ${p*100}% de chance de sucesso.
-    </p>
-
-    <h3>🧮 Passo a passo</h3>
+    <h4>🧮 Passo a passo</h4>
 
     <p><b>1️⃣ Combinação:</b></p>
-    <p>C(${n},${k}) = ${combin}</p>
+    <p>C(${n},${k}) = ${combinacao(n,k)}</p>
 
     <p><b>2️⃣ Probabilidade de sucesso:</b></p>
-    <p>${p}<sup>${k}</sup> = ${sucesso.toFixed(4)}</p>
+    <p>${p}<sup>${k}</sup> = ${(p**k).toFixed(4)}</p>
 
     <p><b>3️⃣ Probabilidade de fracasso:</b></p>
-    <p>(1 − ${p})<sup>${n-k}</sup> = ${fracasso.toFixed(4)}</p>
+    <p>(1 − ${p})<sup>${n-k}</sup> = ${((1-p)**(n-k)).toFixed(4)}</p>
 
-    <p><b>4️⃣ Multiplicando tudo:</b></p>
-
-    <p>
-    P = ${combin} × ${sucesso.toFixed(4)} × ${fracasso.toFixed(4)}
-    </p>
-
-    <h3>🎯 Resultado final</h3>
-
+    <p><b>4️⃣ Resultado final:</b></p>
     <p style="font-size:18px;">
-    P = ${prob.toFixed(2)}%
+    P = ${combinacao(n,k)} × ${(p**k).toFixed(4)} × ${((1-p)**(n-k)).toFixed(4)}
+    = ${prob.toFixed(2)}%
     </p>
     `;
     }
