@@ -246,12 +246,44 @@ function calcular(){
                         exp==1 ? coef+"x" : coef;
 
         out.innerHTML = `
-        <h3>🎯 Termo Geral</h3>
-        Resultado: ${resultado}
+<h3>🎯 Termo Geral</h3>
 
-        <h3>🧠 Explicação</h3>
-        T = C(${n},${k}) · ${a}<sup>${n-k}</sup> · ${b}<sup>${k}</sup>
-        `;
+<div><b>Fórmula:</b> T = C(n,k) · a<sup>n-k</sup> · b<sup>k</sup></div>
+
+<h3>🧠 Como calcular</h3>
+
+<p>Vamos encontrar o <b>${k+1}º termo</b> de (${a}x + ${b})<sup>${n}</sup></p>
+
+<h4>1️⃣ Identificando os valores</h4>
+<ul>
+<li>n = ${n}</li>
+<li>k = ${k}</li>
+<li>a = ${a}</li>
+<li>b = ${b}</li>
+</ul>
+
+<h4>2️⃣ Aplicando a fórmula</h4>
+<p>
+T = C(${n},${k}) · (${a}x)<sup>${n-k}</sup> · ${b}<sup>${k}</sup>
+</p>
+
+<h4>3️⃣ Calculando cada parte</h4>
+<ul>
+<li>C(${n},${k}) = ${combinacao(n,k)}</li>
+<li>(${a}x)<sup>${n-k}</sup> = ${(a**(n-k))}x<sup>${n-k}</sup></li>
+<li>${b}<sup>${k}</sup> = ${(b**k)}</li>
+</ul>
+
+<h4>4️⃣ Resultado final</h4>
+<p style="font-size:18px;">
+T = ${resultado}
+</p>
+
+<h3>💡 Interpretação</h3>
+<p>
+Este é o ${k+1}º termo da expansão, onde o expoente de x é ${n-k}.
+</p>
+`;
     }
 
     // 📊 PROBABILIDADE
@@ -262,12 +294,61 @@ function calcular(){
         let prob = combinacao(n,k)*(0.5**n)*100;
 
         out.innerHTML = `
-        <h3>📊 Resultado</h3>
+        <h3> Resultado</h3>
         P = ${prob.toFixed(2)}%
+        <h3>  
 
-        <h3>🧠 Explicação</h3>
+## Probabilidade Binomial – Explicação
+
+ 
+
+A probabilidade binomial é utilizada quando analisamos situações em que um experimento é repetido várias vezes e, em cada repetição, existem apenas dois resultados possíveis: sucesso ou fracasso. Um exemplo clássico é o lançamento de uma moeda, onde pode sair cara ou coroa.
+
+ 
+
+Para calcular esse tipo de probabilidade, utilizamos a seguinte fórmula:
+
+ <div style="font-size:20px; text-align:center; margin:10px;">
+P = C(n,k) · p<sup>k</sup> · (1 − p)<sup>n − k</sup>
+</div>
+
+Nessa fórmula, **n** representa o número total de tentativas, **k** é a quantidade de sucessos desejados e **p** é a probabilidade de sucesso em cada tentativa.
+
+ 
+
+---
+
+ 
+
+##  Como funciona o cálculo
+
+ 
+
+O cálculo é feito em três etapas principais:
+
+ 
+
+Primeiro, calculamos a **combinação C(n,k)C(n,k)C(n,k)**, que indica de quantas maneiras diferentes podemos obter os sucessos desejados. Isso é importante porque, em muitos casos, a ordem não importa apenas a quantidade de sucessos.
+
+ 
+
+Depois, calculamos a probabilidade de ocorrerem exatamente **k sucessos**, elevando a probabilidade de sucesso ppp ao número de sucessos desejados.
+
+ 
+
+Em seguida, calculamos a probabilidade de ocorrerem os **fracassos restantes**, elevando 1−p1 - p1−p ao número de tentativas que não foram sucesso, ou seja, n−kn - kn−k.
+
+ 
+
+Por fim, multiplicamos todos esses valores para obter a probabilidade final.
+
+  
+</h3>
+        <h3> Explicação</h3>
         P = C(${n},${k}) · (1/2)<sup>${n}</sup>
-        `;
+        `
+        
+        ;
     }
 
     } catch(e){
