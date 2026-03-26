@@ -294,60 +294,44 @@ Este é o ${k+1}º termo da expansão, onde o expoente de x é ${n-k}.
         let prob = combinacao(n,k)*(0.5**n)*100;
 
         out.innerHTML = `
-        <h3> Resultado</h3>
-        P = ${prob.toFixed(2)}%
-        <h3>  
+    <h3>📊 Resultado</h3>
+    <p style="font-size:18px;">P = ${prob.toFixed(2)}%</p>
 
-## Probabilidade Binomial – Explicação
+    <h3>🧠 Probabilidade Binomial – Explicação</h3>
 
- 
+    <p>
+    A probabilidade binomial é usada quando repetimos um experimento várias vezes,
+    com apenas dois resultados possíveis (como cara ou coroa).
+    </p>
 
-A probabilidade binomial é utilizada quando analisamos situações em que um experimento é repetido várias vezes e, em cada repetição, existem apenas dois resultados possíveis: sucesso ou fracasso. Um exemplo clássico é o lançamento de uma moeda, onde pode sair cara ou coroa.
+    <div style="font-size:20px; text-align:center; margin:10px;">
+    P = C(n,k) · p<sup>k</sup> · (1 − p)<sup>${n-k}</sup>
+    </div>
 
- 
+    <p><b>Valores usados:</b></p>
+    <ul>
+        <li>n = ${n}</li>
+        <li>k = ${k}</li>
+        <li>p = ${p}</li>
+    </ul>
 
-Para calcular esse tipo de probabilidade, utilizamos a seguinte fórmula:
+    <h4>🧮 Passo a passo</h4>
 
- <div style="font-size:20px; text-align:center; margin:10px;">
-P = C(n,k) · p<sup>k</sup> · (1 − p)<sup>n − k</sup>
-</div>
+    <p><b>1️⃣ Combinação:</b></p>
+    <p>C(${n},${k}) = ${combinacao(n,k)}</p>
 
-Nessa fórmula, **n** representa o número total de tentativas, **k** é a quantidade de sucessos desejados e **p** é a probabilidade de sucesso em cada tentativa.
+    <p><b>2️⃣ Probabilidade de sucesso:</b></p>
+    <p>${p}<sup>${k}</sup> = ${(p**k).toFixed(4)}</p>
 
- 
+    <p><b>3️⃣ Probabilidade de fracasso:</b></p>
+    <p>(1 − ${p})<sup>${n-k}</sup> = ${((1-p)**(n-k)).toFixed(4)}</p>
 
----
-
- 
-
-##  Como funciona o cálculo
-
- 
-
-O cálculo é feito em três etapas principais:
-
- 
-
-Primeiro, calculamos a **combinação C(n,k)C(n,k)C(n,k)**, que indica de quantas maneiras diferentes podemos obter os sucessos desejados. Isso é importante porque, em muitos casos, a ordem não importa apenas a quantidade de sucessos.
-
- 
-
-Depois, calculamos a probabilidade de ocorrerem exatamente **k sucessos**, elevando a probabilidade de sucesso ppp ao número de sucessos desejados.
-
- 
-
-Em seguida, calculamos a probabilidade de ocorrerem os **fracassos restantes**, elevando 1−p1 - p1−p ao número de tentativas que não foram sucesso, ou seja, n−kn - kn−k.
-
- 
-
-Por fim, multiplicamos todos esses valores para obter a probabilidade final.
-
-  
-
-
-        `
-        
-        ;
+    <p><b>4️⃣ Resultado final:</b></p>
+    <p style="font-size:18px;">
+    P = ${combinacao(n,k)} × ${(p**k).toFixed(4)} × ${((1-p)**(n-k)).toFixed(4)}
+    = ${prob.toFixed(2)}%
+    </p>
+    `;
     }
 
     } catch(e){
