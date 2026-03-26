@@ -229,6 +229,21 @@ function calcular(){
         txt += "\nC(" + n + "," + k + ") = " + combinacao(n,k);
 
         out.innerText = txt;
+        html += `
+<h3>🧠 Explicação</h3>
+<div>
+Usamos a combinação porque a ordem não importa.<br><br>
+
+Fórmula:<br>
+C(n,k) = n! / (k!(n−k)!)<br><br>
+
+Substituindo:<br>
+C(${n},${k}) = ${n}! / (${k}!(${n-k})!)<br><br>
+
+Resultado:<br>
+C(${n},${k}) = ${combinacao(n,k)}
+</div>
+`;
     }
 
     // 📐 Expansão (ax+b)^n
@@ -288,6 +303,21 @@ function calcular(){
     </div>`;
 
     out.innerHTML = html;
+
+    html += `
+<h3>🧠 Explicação</h3>
+<div>
+A expansão usa o Triângulo de Pascal para encontrar os coeficientes.<br><br>
+
+Linha usada (n=${n}): ${tri[n].join(", ")}<br><br>
+
+Cada termo segue a fórmula:<br>
+C(n,k) · a^(n-k) · b^k<br><br>
+
+Ou seja, combinamos:
+coeficiente × potência de a × potência de b
+</div>
+`;
 }
 
     // 🎯 Termo Geral
@@ -326,14 +356,30 @@ function calcular(){
     } else {
         resultado = coef;
     }
-
+    
+    
     // ✨ Mostrar completo
     out.innerHTML = `
         <h3> Termo Geral</h3>
         <div><b>Fórmula:</b> T = C(n,k)·a⁽ⁿ⁻ᵏ⁾·bᵏ</div>
         <div><b>Substituindo:</b> T = C(${n},${k}) · ${a}<sup>${n-k}</sup> · ${b}<sup>${k}</sup></div>
         <div style="margin-top:10px;"><b>Resultado:</b> ${resultado}</div>
+        <div style="margin-top:15px;">
+<h3>🧠 Explicação</h3>
+
+Usamos o termo geral para encontrar apenas um termo da expansão.<br><br>
+
+Fórmula:<br>
+T = C(n,k) · a^(n-k) · b^k<br><br>
+
+Substituindo:<br>
+T = C(${n},${k}) · ${a}<sup>${n-k}</sup> · ${b}<sup>${k}</sup><br><br>
+
+Isso representa o termo com x elevado a ${n-k}.
+</div>
     `;
+
+    
 }
 
     // 📊 Probabilidade (%)
@@ -349,6 +395,23 @@ function calcular(){
     } catch(e){
         out.innerText = "Erro nos dados!";
     }
+    let prob = combinacao(n,k)*(0.5**n)*100;
+
+out.innerHTML = `
+<h3>📊 Resultado</h3>
+P = ${prob.toFixed(2)}%
+
+<h3>🧠 Explicação</h3>
+Usamos a probabilidade binomial porque cada evento tem 50% de chance.<br><br>
+
+Fórmula:<br>
+P = C(n,k) · (1/2)<sup>n</sup><br><br>
+
+Substituindo:<br>
+P = C(${n},${k}) · (1/2)<sup>${n}</sup><br><br>
+
+Isso calcula a chance de acontecer exatamente ${k} sucessos em ${n} tentativas.
+`;
 }
 
 mudarCampos();
