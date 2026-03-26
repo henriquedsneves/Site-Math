@@ -29,6 +29,15 @@
 
 <script>
 
+function fatorial(n){
+    if(n === 0 || n === 1) return 1;
+    let res = 1;
+    for(let i = 2; i <= n; i++){
+        res *= i;
+    }
+    return res;
+}
+
 function sup(num){
     const mapa = {
         "0":"⁰","1":"¹","2":"²","3":"³","4":"⁴",
@@ -44,60 +53,8 @@ function combinacao(n,k){
     return res;
 }
 
-// 🔄 Atualiza campos
+
 function mudarCampos(){
-    let op = document.getElementById("opcao").value;
-    let f = document.getElementById("formula");
-    let div = document.getElementById("inputs");
-
-    if(op==1){
-        
-        div.innerHTML = `
-        n: <input id="n">
-        k: <input id="k">
-        Resultado: <input id="res">
-        `;
-    }
-
-    if(op==2){
-      
-        div.innerHTML = `n: <input id="n">`;
-    }
-
-    if(op==3){
-       
-        div.innerHTML = `n: <input id="n">`;
-    }
-
-    if(op==4){
-        
-        div.innerHTML = `
-        a: <input id="a">
-        b: <input id="b">
-        n: <input id="n">
-        `;
-    }
-
-    if(op==5){
-       
-        div.innerHTML = `
-        n: <input id="n">
-        k: <input id="k">
-        a: <input id="a">
-        b: <input id="b">
-        T: <input id="T">
-        `;
-    }
-
-    if(op==6){
-       
-        div.innerHTML = `
-        n: <input id="n">
-        k: <input id="k">
-        P: <input id="P">
-        `;
-    }
-}function mudarCampos(){
     let op = document.getElementById("opcao").value;
     let f = document.getElementById("formula");
     let div = document.getElementById("inputs");
@@ -395,51 +352,62 @@ Este é o ${k+1}º termo da expansão, onde o expoente de x é ${n-k}.
 
     // 📊 PROBABILIDADE
     if(op==6){
-        let n = Number(document.getElementById("n").value);
-        let k = Number(document.getElementById("k").value);
 
-        let prob = combinacao(n,k)*(0.5**n)*100;
+    let n = document.getElementById("n").value;
+    let k = document.getElementById("k").value;
 
-        out.innerHTML = `
+    if(n === "" || k === ""){
+        out.innerHTML = "⚠️ Preencha todos os campos!";
+        return;
+    }
+
+    n = Number(n);
+    k = Number(k);
+
+    if(isNaN(n) || isNaN(k)){
+        out.innerHTML = "⚠️ Digite apenas números!";
+        return;
+    }
+
+    if(k > n){
+        out.innerHTML = "⚠️ k não pode ser maior que n!";
+        return;
+    }
+
+    let p = 0.5;
+
+    let combin = combinacao(n,k);
+    let sucesso = p**k;
+    let fracasso = (1-p)**(n-k);
+    let prob = combin * sucesso * fracasso * 100;
+
+    out.innerHTML = `
     <h3>📊 Resultado</h3>
     <p style="font-size:18px;">P = ${prob.toFixed(2)}%</p>
 
-    <h3>🧠 Probabilidade Binomial – Explicação</h3>
+    <h3>🧠 Explicação</h3>
 
-    <p>
-    A probabilidade binomial é usada quando repetimos um experimento várias vezes,
-    com apenas dois resultados possíveis (como cara ou coroa).
-    </p>
-
-    <div style="font-size:20px; text-align:center; margin:10px;">
+    <div style="font-size:20px; text-align:center;">
     P = C(n,k) · p<sup>k</sup> · (1 − p)<sup>${n-k}</sup>
     </div>
 
-    <p><b>Valores usados:</b></p>
     <ul>
         <li>n = ${n}</li>
         <li>k = ${k}</li>
         <li>p = ${p}</li>
     </ul>
 
-    <h4>🧮 Passo a passo</h4>
+    <p>
+    C(${n},${k}) = ${combin}<br>
+    ${p}<sup>${k}</sup> = ${sucesso.toFixed(4)}<br>
+    (1 − ${p})<sup>${n-k}</sup> = ${fracasso.toFixed(4)}
+    </p>
 
-    <p><b>1️⃣ Combinação:</b></p>
-    <p>C(${n},${k}) = ${combinacao(n,k)}</p>
-
-    <p><b>2️⃣ Probabilidade de sucesso:</b></p>
-    <p>${p}<sup>${k}</sup> = ${(p**k).toFixed(4)}</p>
-
-    <p><b>3️⃣ Probabilidade de fracasso:</b></p>
-    <p>(1 − ${p})<sup>${n-k}</sup> = ${((1-p)**(n-k)).toFixed(4)}</p>
-
-    <p><b>4️⃣ Resultado final:</b></p>
     <p style="font-size:18px;">
-    P = ${combinacao(n,k)} × ${(p**k).toFixed(4)} × ${((1-p)**(n-k)).toFixed(4)}
-    = ${prob.toFixed(2)}%
+    Resultado = ${prob.toFixed(2)}%
     </p>
     `;
-    }
+}
 
     } catch(e){
         out.innerHTML = "Erro nos dados!";
