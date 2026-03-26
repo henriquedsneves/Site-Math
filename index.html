@@ -146,79 +146,82 @@ function calcular(){
     try{
 
     // 🔺 COMBINAÇÃO + PASCAL
-   if(op==1){
-        let n = Number(document.getElementById("n").value);
-        let k = Number(document.getElementById("k").value);
+  if(op==1){
 
-        let tri = [];
+    let n = document.getElementById("n").value;
+    let k = document.getElementById("k").value;
 
-        for(let i=0;i<=n;i++){
-            let linha=[];
-            for(let j=0;j<=i;j++){
-                if(j==0||j==i) linha.push(1);
-                else linha.push(tri[i-1][j-1]+tri[i-1][j]);
-            }
-            tri.push(linha);
+    // 🔒 VALIDAÇÃO
+    if(n === "" || k === ""){
+        out.innerHTML = "⚠️ Preencha todos os campos!";
+        return;
+    }
+
+    n = Number(n);
+    k = Number(k);
+
+    if(isNaN(n) || isNaN(k)){
+        out.innerHTML = "⚠️ Digite apenas números!";
+        return;
+    }
+
+    if(k > n){
+        out.innerHTML = "⚠️ k não pode ser maior que n!";
+        return;
+    }
+
+    let resultado = combinacao(n,k);
+
+    // 🔺 TRIÂNGULO DE PASCAL
+    let tri = [];
+
+    for(let i=0;i<=n;i++){
+        let linha=[];
+        for(let j=0;j<=i;j++){
+            if(j==0||j==i) linha.push(1);
+            else linha.push(tri[i-1][j-1]+tri[i-1][j]);
         }
+        tri.push(linha);
+    }
 
-        let html = "<h3>🔺 Triângulo de Pascal</h3>";
+    let html = "<h3>🔺 Triângulo de Pascal</h3>";
 
-        for(let i=0;i<tri.length;i++){
-            html += `<div style="text-align:center;">`;
-            for(let j=0;j<tri[i].length;j++){
-                html += `<span style="display:inline-block;width:40px;font-weight:bold;">${tri[i][j]}</span>`;
-            }
-            html += `</div>`;
+    for(let i=0;i<tri.length;i++){
+        html += `<div style="text-align:center;">`;
+        for(let j=0;j<tri[i].length;j++){
+            html += `<span style="display:inline-block;width:40px;font-weight:bold;">${tri[i][j]}</span>`;
         }
+        html += `</div>`;
+    }
 
-        html += `<h3>📊 Resultado</h3>
-        C(${n},${k}) = ${combinacao(n,k)}`;
-
-        html += `
-        <h3>🧠 Explicação</h3>
-        Usamos combinação porque a ordem não importa.<br><br>
-        C(${n},${k}) = ${n}! / (${k}!(${n-k})!)
-        `;
-
-        out.innerHTML = html;
-        out.innerHTML = `
+    // 🚀 AGORA JUNTA TUDO (SEM APAGAR)
+    out.innerHTML = `
     <h3>📊 Combinação</h3>
-
-    <p>Vamos calcular:</p>
 
     <p style="font-size:18px; text-align:center;">
     C(${n},${k})
     </p>
 
-    <h3>🧠 O que é combinação?</h3>
-
-    <p>
-    A combinação é usada quando queremos saber quantas formas diferentes
-    podemos escolher elementos <b>sem se importar com a ordem</b>.
-    </p>
+    ${html}
 
     <h3>📌 Fórmula</h3>
 
-    <div style="font-size:20px; text-align:center; margin:10px;">
+    <div style="font-size:20px; text-align:center;">
     C(n,k) = n! / (k! · (n − k)!)
     </div>
 
-    <h3>📊 Valores usados</h3>
+    <h3>📊 Valores</h3>
 
     <ul>
         <li>n = ${n}</li>
         <li>k = ${k}</li>
     </ul>
 
-    <h3>🧮 Passo a passo</h3>
-
-    <p><b>1️⃣ Substituindo na fórmula:</b></p>
+    <h3>🧮 Cálculo</h3>
 
     <p>
     C(${n},${k}) = ${n}! / (${k}! · (${n-k})!)
     </p>
-
-    <p><b>2️⃣ Calculando fatoriais:</b></p>
 
     <p>
     ${n}! = ${fatorial(n)}<br>
@@ -226,13 +229,13 @@ function calcular(){
     ${n-k}! = ${fatorial(n-k)}
     </p>
 
-    <p><b>3️⃣ Resultado final:</b></p>
+    <h3>🎯 Resultado</h3>
 
     <p style="font-size:18px;">
     C(${n},${k}) = ${resultado}
     </p>
     `;
-    }
+}
     // 📐 EXPANSÃO
     if(op==4){
         let a = Number(document.getElementById("a").value);
