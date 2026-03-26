@@ -229,7 +229,61 @@ function calcular(){
         Linha usada: ${tri[n].join(", ")}
         `;
 
-        out.innerHTML = html;
+        out.innerHTML = `
+<h3>📐 Expansão Binomial</h3>
+
+<p>Vamos expandir a expressão:</p>
+
+<p style="font-size:18px; text-align:center;">
+(${a}x + ${b})<sup>${n}</sup>
+</p>
+
+<h3>🧠 Como funciona</h3>
+
+<p>
+A expansão binomial transforma a expressão em uma soma de termos.
+Cada termo é calculado usando combinação e potências.
+</p>
+
+<div style="font-size:20px; text-align:center; margin:10px;">
+(a + b)<sup>n</sup> = C(n,k) · a<sup>n-k</sup> · b<sup>k</sup>
+</div>
+
+<h4>📊 Valores usados</h4>
+<ul>
+<li>n = ${n}</li>
+<li>a = ${a}</li>
+<li>b = ${b}</li>
+</ul>
+
+<h3>🔺 Coeficientes (Triângulo de Pascal)</h3>
+<p>Linha ${n}: ${tri[n].join(", ")}</p>
+
+<h3>🧮 Passo a passo</h3>
+`;
+
+for(let k=0;k<=n;k++){
+    let coef = combinacao(n,k);
+    let parteA = (a**(n-k));
+    let parteB = (b**k);
+    let resultadoTermo = coef * parteA * parteB;
+
+    out.innerHTML += `
+    <p>
+    Termo ${k+1}: 
+    C(${n},${k}) · (${a}x)<sup>${n-k}</sup> · ${b}<sup>${k}</sup> 
+    = ${coef} · ${parteA}x<sup>${n-k}</sup> · ${parteB}
+    = ${resultadoTermo}x<sup>${n-k}</sup>
+    </p>
+    `;
+}
+
+out.innerHTML += `
+<h3>🎯 Resultado final</h3>
+<p style="font-size:18px;">
+${termos.join(" + ")}
+</p>
+`;
     }
 
     // 🎯 TERMO GERAL
