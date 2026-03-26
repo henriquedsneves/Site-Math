@@ -180,7 +180,7 @@ function calcular(){
         C(${n},${k}) = ${n}! / (${k}!(${n-k})!)
         `;
 
-        out.innerHTML = `
+       out.innerHTML = `
     <h3>📊 Combinação</h3>
 
     <p>Vamos calcular:</p>
@@ -392,51 +392,57 @@ Este é o ${k+1}º termo da expansão, onde o expoente de x é ${n-k}.
 
     // 📊 PROBABILIDADE
     if(op==6){
-        let n = Number(document.getElementById("n").value);
-        let k = Number(document.getElementById("k").value);
 
-        let prob = combinacao(n,k)*(0.5**n)*100;
+    let n = document.getElementById("n").value;
+    let k = document.getElementById("k").value;
 
-        out.innerHTML = `
-    <h3>📊 Resultado</h3>
-    <p style="font-size:18px;">P = ${prob.toFixed(2)}%</p>
+    // 🔒 VALIDAÇÃO
+    if(n === "" || k === ""){
+        out.innerHTML = "⚠️ Preencha todos os campos!";
+        return;
+    }
 
-    <h3>🧠 Probabilidade Binomial – Explicação</h3>
+    n = Number(n);
+    k = Number(k);
 
-    <p>
-    A probabilidade binomial é usada quando repetimos um experimento várias vezes,
-    com apenas dois resultados possíveis (como cara ou coroa).
-    </p>
+    if(isNaN(n) || isNaN(k)){
+        out.innerHTML = "⚠️ Digite apenas números!";
+        return;
+    }
+
+    if(k > n){
+        out.innerHTML = "⚠️ k não pode ser maior que n!";
+        return;
+    }
+
+    let p = 0.5;
+    let combin = combinacao(n,k);
+    let sucesso = p**k;
+    let fracasso = (1-p)**(n-k);
+    let prob = combin * sucesso * fracasso * 100;
+
+    out.innerHTML = `
+    <h3>📊 Probabilidade Binomial</h3>
+
+    <p><b>${k} sucessos em ${n} tentativas</b></p>
 
     <div style="font-size:20px; text-align:center; margin:10px;">
     P = C(n,k) · p<sup>k</sup> · (1 − p)<sup>${n-k}</sup>
     </div>
 
-    <p><b>Valores usados:</b></p>
-    <ul>
-        <li>n = ${n}</li>
-        <li>k = ${k}</li>
-        <li>p = ${p}</li>
-    </ul>
+    <h3>🧮 Cálculo</h3>
 
-    <h4>🧮 Passo a passo</h4>
+    <p>C(${n},${k}) = ${combin}</p>
+    <p>${p}<sup>${k}</sup> = ${sucesso.toFixed(4)}</p>
+    <p>(1 − ${p})<sup>${n-k}</sup> = ${fracasso.toFixed(4)}</p>
 
-    <p><b>1️⃣ Combinação:</b></p>
-    <p>C(${n},${k}) = ${combinacao(n,k)}</p>
+    <h3>🎯 Resultado</h3>
 
-    <p><b>2️⃣ Probabilidade de sucesso:</b></p>
-    <p>${p}<sup>${k}</sup> = ${(p**k).toFixed(4)}</p>
-
-    <p><b>3️⃣ Probabilidade de fracasso:</b></p>
-    <p>(1 − ${p})<sup>${n-k}</sup> = ${((1-p)**(n-k)).toFixed(4)}</p>
-
-    <p><b>4️⃣ Resultado final:</b></p>
     <p style="font-size:18px;">
-    P = ${combinacao(n,k)} × ${(p**k).toFixed(4)} × ${((1-p)**(n-k)).toFixed(4)}
-    = ${prob.toFixed(2)}%
+    P = ${prob.toFixed(2)}%
     </p>
     `;
-    }
+}
 
     } catch(e){
         out.innerHTML = "Erro nos dados!";
