@@ -194,32 +194,44 @@ function calcular(){
         htmlTriangulo += `</div>`;
     }
 
-    // 🚀 SAÍDA FINAL
     out.innerHTML = `
     <h3>📊 Combinação</h3>
+
+    <p>Vamos calcular:</p>
 
     <p style="font-size:18px; text-align:center;">
     C(${n},${k})
     </p>
 
-    ${htmlTriangulo}
+    <h3>🧠 O que é combinação?</h3>
+
+    <p>
+    A combinação é usada quando queremos saber quantas formas diferentes
+    podemos escolher elementos <b>sem se importar com a ordem</b>.
+    </p>
 
     <h3>📌 Fórmula</h3>
-    <div style="font-size:20px; text-align:center;">
+
+    <div style="font-size:20px; text-align:center; margin:10px;">
     C(n,k) = n! / (k! · (n − k)!)
     </div>
 
-    <h3>📊 Valores</h3>
+    <h3>📊 Valores usados</h3>
+
     <ul>
         <li>n = ${n}</li>
         <li>k = ${k}</li>
     </ul>
 
-    <h3>🧮 Cálculo</h3>
+    <h3>🧮 Passo a passo</h3>
+
+    <p><b>1️⃣ Substituindo na fórmula:</b></p>
 
     <p>
     C(${n},${k}) = ${n}! / (${k}! · (${n-k})!)
     </p>
+
+    <p><b>2️⃣ Calculando fatoriais:</b></p>
 
     <p>
     ${n}! = ${fatorial(n)}<br>
@@ -227,7 +239,7 @@ function calcular(){
     ${n-k}! = ${fatorial(n-k)}
     </p>
 
-    <h3>🎯 Resultado</h3>
+    <p><b>3️⃣ Resultado final:</b></p>
 
     <p style="font-size:18px;">
     C(${n},${k}) = ${resultado}
